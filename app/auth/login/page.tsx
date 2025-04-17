@@ -7,6 +7,9 @@ import { api } from "@/api/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { jwtDecode } from "jwt-decode";
+import { useUserStore } from "@/store/userStore";
+
 export default function LoginPage() {
   const router = useRouter();
 
@@ -16,13 +19,44 @@ export default function LoginPage() {
       return response;
     },
     onSuccess: (response) => {
-      const token = response.data.token;
-      localStorage.setItem("token", token); // 🔐 store JWT
-      // 🔐 store in cookie for middleware access
+      const token = response.data.token!;
+      localStorage.setItem("token", token);
       setCookie("token", token);
 
+      const decoded: any = jwtDecode(token);
+      console.log("DECODED TOKEN", decoded);
+
+      const role =
+        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+      useUserStore.getState().setUser({
+        role,
+        email:
+          decoded[
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+          ],
+        petrolPumpId: decoded.petrolPumpId,
+      });
+
       toast.success("Login successful");
-      router.push("/dashboard"); // ✅ redirect after login
+
+      switch (role) {
+        case "Admin":
+          router.push("/admin");
+          break;
+        case "Manager":
+          router.push("/dashboard");
+          break;
+        case "Employee":
+          router.push("/sales");
+          break;
+        case "Attendant":
+          router.push("/readings");
+          break;
+        default:
+          router.push("/unauthorized");
+          break;
+      }
     },
     onError: () => {
       toast.error("Invalid email or password");
@@ -30,12 +64,8 @@ export default function LoginPage() {
   });
 
   return (
-    <div className="max-w-sm mx-auto mt-10 p-6 border rounded-md shadow">
-      <h2 className="text-xl font-semibold mb-4">Login</h2>
-      <LoginForm onSubmit={(data) => mutateAsync(data)} />
-      {isPending && (
-        <p className="text-sm text-muted-foreground mt-2">Logging in...</p>
-      )}
-    </div>
+    <main className="flex min-h-screen items-center justify-center bg-gray-50">
+      <LoginForm onSubmit={mutateAsync} isPending={isPending} />
+    </main>
   );
 }

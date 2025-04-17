@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pump 360",
+  title: "Pump 360 Home Page",
   description: "Powered by Moksha Solutions",
 };
 
@@ -29,10 +29,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          {children}
-          <Toaster position="top-center" richColors />
-        </ReactQueryProvider>
+        <div className="min-h-screen bg-gray-100 flex">
+          <ReactQueryProvider>
+            {children}
+            <Toaster position="top-center" richColors />
+          </ReactQueryProvider>
+        </div>
       </body>
     </html>
   );

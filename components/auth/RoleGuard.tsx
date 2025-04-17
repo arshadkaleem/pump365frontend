@@ -14,12 +14,25 @@ export default function RoleGuard({
   const router = useRouter();
 
   useEffect(() => {
-    const role = getUserRole();
+    const token = localStorage.getItem("token");
+    console.log(token);
+   
 
-    if (!role || !allowedRoles.includes(role)) {
-      router.replace("/unauthorized"); // ⛔ redirect to access-denied page
+    if (!token) {
+      router.replace("/auth/login"); // 🔐 Not logged in
+      return;
     }
-  }, [router]);
+
+    const role = getUserRole();
+    
+    if (!role || !allowedRoles.includes(role)) {
+      router.replace("/unauthorized"); // 🔐 Not authorized
+    }
+
+    
+
+
+  }, [router, allowedRoles]);
 
   return <>{children}</>;
 }
