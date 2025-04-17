@@ -58,7 +58,7 @@ export function PetrolPumpForm({
             <FormItem>
               <FormLabel>License Number</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value ?? ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -72,7 +72,7 @@ export function PetrolPumpForm({
             <FormItem>
               <FormLabel>Company Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value ?? ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
