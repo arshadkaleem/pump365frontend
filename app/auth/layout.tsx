@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../../app/globals.css";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/lib/ReactQueryProvider";
 
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pump 360",
+  title: "Pump 360 Registration Form",
   description: "Powered by Moksha Solutions",
 };
 
