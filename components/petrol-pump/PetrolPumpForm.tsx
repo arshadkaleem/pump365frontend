@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   petrolPumpSchema,
   PetrolPumpFormValues,
-} from "@/schema/petrolPumpSchema";
+} from "@/schema/pump/petrolPumpSchema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { PetrolPumpFormValues } from "@/schema/petrolPumpSchema";
+import { PetrolPumpFormValues } from "@/schema/pump/petrolPumpSchema";
 import { api } from "@/api/api";
 import { PetrolPumpForm } from "@/components/petrol-pump/PetrolPumpForm";
 import { toast } from "sonner";

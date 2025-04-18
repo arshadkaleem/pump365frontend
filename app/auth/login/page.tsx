@@ -29,6 +29,8 @@ export default function LoginPage() {
       const role =
         decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
+      const isProfileComplete = decoded.isPetrolPumpDetailComplete === "true";
+
       useUserStore.getState().setUser({
         role,
         email:
@@ -36,9 +38,16 @@ export default function LoginPage() {
             "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
           ],
         petrolPumpId: decoded.petrolPumpId,
+        isProfileComplete, // ✅ store it
       });
 
       toast.success("Login successful");
+
+      // ✅ Manager check + redirect
+      if (role === "Manager" && !isProfileComplete) {
+        router.push("/update-pump");
+        return;
+      }
 
       switch (role) {
         case "Admin":
