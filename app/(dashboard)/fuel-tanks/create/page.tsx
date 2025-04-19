@@ -83,7 +83,7 @@ export default function NewFuelTankPage() {
         petrolPumpId,
       });
 
-      router.push("/dashboard/fuel-tanks");
+      router.push("/fuel-tanks");
     } catch (error) {
       console.error("Error creating fuel tank:", error);
     } finally {
@@ -95,7 +95,7 @@ export default function NewFuelTankPage() {
     <div className="max-w-2xl mx-auto">
       <div className="mb-8">
         <Link
-          href="/dashboard/fuel-tanks"
+          href="/fuel-tanks"
           className="flex items-center text-muted-foreground hover:text-primary mb-2"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -173,11 +173,13 @@ export default function NewFuelTankPage() {
                 className={errors.currentStock ? "border-red-500" : ""}
                 {...register("currentStock", { valueAsNumber: true })}
               />
-              {watchCapacity && watchCurrentStock > watchCapacity && (
-                <p className="text-xs text-red-500">
-                  Current stock cannot exceed tank capacity
-                </p>
-              )}
+              {watchCapacity &&
+                watchCurrentStock !== undefined &&
+                watchCurrentStock > watchCapacity && (
+                  <p className="text-xs text-red-500">
+                    Current stock cannot exceed tank capacity
+                  </p>
+                )}
               {errors.currentStock && (
                 <p className="text-xs text-red-500">
                   {errors.currentStock.message}
@@ -213,7 +215,7 @@ export default function NewFuelTankPage() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => router.push("/dashboard/fuel-tanks")}
+              onClick={() => router.push("/fuel-tanks")}
             >
               Cancel
             </Button>

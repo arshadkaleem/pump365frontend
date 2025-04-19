@@ -112,7 +112,7 @@ export default function FuelTanksPage() {
             Manage your fuel tanks and monitor fuel levels
           </p>
         </div>
-        <Link href="/dashboard/fuel-tanks/new">
+        <Link href="/fuel-tanks/create">
           <Button className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
             <span>Add Fuel Tank</span>
@@ -180,7 +180,7 @@ export default function FuelTanksPage() {
 
               <div className="flex gap-2 pt-2">
                 <Link
-                  href={`/dashboard/fuel-tanks/${tank.fuelTankId}`}
+                  href={`/fuel-tanks/${tank.fuelTankId}`}
                   className="flex-1"
                 >
                   <Button variant="outline" className="w-full">
@@ -189,7 +189,7 @@ export default function FuelTanksPage() {
                   </Button>
                 </Link>
                 <Link
-                  href={`/dashboard/fuel-tanks/${tank.fuelTankId}/edit`}
+                  href={`/fuel-tanks/${tank.fuelTankId}/edit`}
                   className="flex-1"
                 >
                   <Button variant="outline" className="w-full">
@@ -210,7 +210,7 @@ export default function FuelTanksPage() {
           <p className="text-muted-foreground mb-4">
             You haven't added any fuel tanks yet.
           </p>
-          <Link href="/dashboard/fuel-tanks/new">
+          <Link href="/fuel-tanks/create">
             <Button>
               <Plus className="mr-2 h-4 w-4" />
               Add Your First Fuel Tank
