@@ -9,7 +9,7 @@
  * ## SOURCE: https://github.com/acacode/swagger-typescript-api ##
  * ---------------------------------------------------------------
  */
-
+import { ApiResponse } from "@/type/apiResponse";
 import {
   AddressCreateUpdateDTO,
   AddressDTO,
@@ -98,7 +98,7 @@ import {
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
 export class Api<
-  SecurityDataType = unknown,
+  SecurityDataType = unknown
 > extends HttpClient<SecurityDataType> {
   /**
    * No description
@@ -161,7 +161,7 @@ export class Api<
   addressUpdate = (
     id: string,
     data: AddressCreateUpdateDTO,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Address/${id}`,
@@ -209,7 +209,7 @@ export class Api<
        */
       pageSize?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<
       AuditLogListAPIServiceResponse,
@@ -244,7 +244,7 @@ export class Api<
        */
       pageSize?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<
       AuditLogListAPIServiceResponse,
@@ -282,7 +282,7 @@ export class Api<
        */
       pageSize?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<
       AuditLogListAPIServiceResponse,
@@ -323,7 +323,7 @@ export class Api<
    */
   authChangePasswordCreate = (
     data: ChangePasswordDTO,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Auth/change-password`,
@@ -343,7 +343,7 @@ export class Api<
    */
   authAdminChangePasswordCreate = (
     data: AdminChangePasswordDTO,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Auth/admin/change-password`,
@@ -525,7 +525,7 @@ export class Api<
   customersUpdate = (
     id: string,
     data: CustomerUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BooleanAPIServiceResponse, any>({
       path: `/api/Customers/${id}`,
@@ -579,7 +579,7 @@ export class Api<
   customersLoyaltyPointsPartialUpdate = (
     id: string,
     data: number,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BooleanAPIServiceResponse, any>({
       path: `/api/Customers/${id}/LoyaltyPoints`,
@@ -603,7 +603,7 @@ export class Api<
       /** @format date-time */
       date?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<DailySalesSummaryDTO, any>({
       path: `/api/Dashboard/sales/daily`,
@@ -628,7 +628,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<DailySalesSummaryDTO, any>({
       path: `/api/Dashboard/sales/trend`,
@@ -653,7 +653,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelTypeSalesSummaryDTO, any>({
       path: `/api/Dashboard/sales/by-fuel-type`,
@@ -676,7 +676,7 @@ export class Api<
       /** @format date-time */
       date?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<HourlySalesPatternDTO, any>({
       path: `/api/Dashboard/sales/hourly-pattern`,
@@ -717,7 +717,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<InventoryTrendDTO, any>({
       path: `/api/Dashboard/inventory/trend`,
@@ -743,7 +743,7 @@ export class Api<
        */
       days?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelConsumptionRateDTO, any>({
       path: `/api/Dashboard/inventory/consumption-rates`,
@@ -768,7 +768,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<RevenueSummaryDTO, any>({
       path: `/api/Dashboard/finance/revenue-summary`,
@@ -793,7 +793,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<PaymentMethodBreakdownDTO, any>({
       path: `/api/Dashboard/finance/payment-methods`,
@@ -818,7 +818,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<DailyRevenueDTO, any>({
       path: `/api/Dashboard/finance/daily-revenue`,
@@ -841,7 +841,7 @@ export class Api<
       /** @format date-time */
       date?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<OperationalSummaryDTO, any>({
       path: `/api/Dashboard/operations/summary`,
@@ -866,7 +866,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzlePerformanceDTO, any>({
       path: `/api/Dashboard/operations/nozzle-performance`,
@@ -891,7 +891,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<ShiftPerformanceDTO, any>({
       path: `/api/Dashboard/operations/shift-performance`,
@@ -916,7 +916,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<CustomerInsightsDTO, any>({
       path: `/api/Dashboard/customers/insights`,
@@ -946,7 +946,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<TopCustomerDTO, any>({
       path: `/api/Dashboard/customers/top`,
@@ -971,7 +971,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BusinessKpiDTO, any>({
       path: `/api/Dashboard/business/kpi`,
@@ -997,7 +997,7 @@ export class Api<
        */
       forecastDays?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<ForecastingDTO, any>({
       path: `/api/Dashboard/business/forecast`,
@@ -1048,7 +1048,7 @@ export class Api<
   districtsUpdate = (
     id: string,
     data: DistrictDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Districts/${id}`,
@@ -1099,7 +1099,7 @@ export class Api<
    * @secure
    */
   employeeList = (params: RequestParams = {}) =>
-    this.request<EmployeeDto[], any>({
+    this.request<APIServiceResponse<EmployeeDto[]>, any>({
       path: `/api/Employee`,
       method: "GET",
       secure: true,
@@ -1151,7 +1151,7 @@ export class Api<
   employeeUpdate = (
     id: string,
     data: EmployeeUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Employee/${id}`,
@@ -1218,7 +1218,7 @@ export class Api<
    */
   employeeShiftAssignCreate = (
     data: AssignEmployeeShiftDTO,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<StringAPIServiceResponse, any>({
       path: `/api/EmployeeShift/assign`,
@@ -1286,7 +1286,7 @@ export class Api<
    */
   enhancedFuelInventoryConfigureThresholdsCreate = (
     data: StockThresholdConfigDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BooleanAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/configure-thresholds`,
@@ -1308,7 +1308,7 @@ export class Api<
   enhancedFuelInventoryConsumptionForecastDetail = (
     tankId: string,
     days: number,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelConsumptionForecastDtoAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/consumption-forecast/${tankId}/${days}`,
@@ -1332,7 +1332,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<InventoryDiscrepancyDtoListAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/discrepancies`,
@@ -1352,7 +1352,7 @@ export class Api<
    */
   enhancedFuelInventoryReconcileCreate = (
     data: ReconciliationRequestDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<InventoryReconciliationDtoAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/reconcile`,
@@ -1379,7 +1379,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<InventoryHistoryDtoAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/history/${tankId}`,
@@ -1399,7 +1399,7 @@ export class Api<
    */
   enhancedFuelInventoryUpdateAfterSaleCreate = (
     data: InventoryUpdateRequestDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BooleanAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/update-after-sale`,
@@ -1420,7 +1420,7 @@ export class Api<
    */
   enhancedFuelInventoryUpdateAfterDeliveryCreate = (
     data: InventoryUpdateRequestDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<BooleanAPIServiceResponse, any>({
       path: `/api/EnhancedFuelInventory/update-after-delivery`,
@@ -1457,7 +1457,7 @@ export class Api<
    */
   fuelDeliveryCreate = (
     data: FuelDeliveryCreateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDeliveryLogDto, any>({
       path: `/api/FuelDelivery`,
@@ -1527,7 +1527,7 @@ export class Api<
   fuelDeliveryUpdate = (
     id: string,
     data: FuelDeliveryUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/FuelDelivery/${id}`,
@@ -1578,7 +1578,7 @@ export class Api<
    */
   fuelDeliveryBySupplierDetail = (
     supplierId: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDeliveryLogDto[], any>({
       path: `/api/FuelDelivery/BySupplier/${supplierId}`,
@@ -1602,7 +1602,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDeliveryLogDto[], any>({
       path: `/api/FuelDelivery/ByDateRange`,
@@ -1622,7 +1622,7 @@ export class Api<
    */
   fuelDeliveryByInvoiceDetail = (
     invoiceNumber: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDeliveryLogDto, any>({
       path: `/api/FuelDelivery/ByInvoice/${invoiceNumber}`,
@@ -1641,7 +1641,7 @@ export class Api<
    */
   fuelDeliveryCheckInvoiceDetail = (
     invoiceNumber: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<boolean, any>({
       path: `/api/FuelDelivery/CheckInvoice/${invoiceNumber}`,
@@ -1662,7 +1662,7 @@ export class Api<
     query?: {
       fuelType?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDeliverySummaryDto[], any>({
       path: `/api/FuelDelivery/Summary`,
@@ -1698,7 +1698,7 @@ export class Api<
    */
   fuelDispenserCreate = (
     data: FuelDispenserCreateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelDispenserUnitDto, any>({
       path: `/api/FuelDispenser`,
@@ -1719,7 +1719,7 @@ export class Api<
    */
   fuelDispenserUpdate = (
     data: FuelDispenserUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/FuelDispenser`,
@@ -1802,7 +1802,7 @@ export class Api<
    */
   fuelQualityCheckCreate = (
     data: FuelQualityCheckCreateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelQualityCheckDto, any>({
       path: `/api/FuelQualityCheck`,
@@ -1840,7 +1840,7 @@ export class Api<
   fuelQualityCheckUpdate = (
     id: string,
     data: FuelQualityCheckUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/FuelQualityCheck/${id}`,
@@ -1891,7 +1891,7 @@ export class Api<
    */
   fuelQualityCheckByStatusDetail = (
     status: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelQualityCheckDto[], any>({
       path: `/api/FuelQualityCheck/ByStatus/${status}`,
@@ -1926,7 +1926,7 @@ export class Api<
    */
   fuelQualityCheckApprovePartialUpdate = (
     id: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/FuelQualityCheck/${id}/Approve`,
@@ -1943,7 +1943,7 @@ export class Api<
    * @secure
    */
   fuelTankList = (params: RequestParams = {}) =>
-    this.request<FuelTankDto[], any>({
+    this.request<APIServiceResponse<FuelTankDto[]>, any>({
       path: `/api/FuelTank`,
       method: "GET",
       secure: true,
@@ -1995,7 +1995,7 @@ export class Api<
   fuelTankUpdate = (
     id: string,
     data: FuelTankUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/FuelTank/${id}`,
@@ -2046,7 +2046,7 @@ export class Api<
    */
   fuelTankAdjustStockCreate = (
     data: FuelTankStockAdjustmentDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<FuelTankDto, any>({
       path: `/api/FuelTank/AdjustStock`,
@@ -2170,7 +2170,7 @@ export class Api<
       /** @format uuid */
       excludeNozzleId?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<boolean, any>({
       path: `/api/Nozzle/validate/${dispenserId}/${nozzleNumber}`,
@@ -2206,7 +2206,7 @@ export class Api<
    */
   nozzleMaintenanceCreate = (
     data: NozzleMaintenanceCreateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleMaintenanceDto, any>({
       path: `/api/NozzleMaintenance`,
@@ -2244,7 +2244,7 @@ export class Api<
   nozzleMaintenanceUpdate = (
     id: string,
     data: NozzleMaintenanceUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/NozzleMaintenance/${id}`,
@@ -2279,7 +2279,7 @@ export class Api<
    */
   nozzleMaintenanceByNozzleDetail = (
     nozzleId: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleMaintenanceDto[], any>({
       path: `/api/NozzleMaintenance/ByNozzle/${nozzleId}`,
@@ -2304,7 +2304,7 @@ export class Api<
        */
       days?: number;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleMaintenanceDto[], any>({
       path: `/api/NozzleMaintenance/Upcoming`,
@@ -2324,7 +2324,7 @@ export class Api<
    */
   nozzleMaintenanceByTypeDetail = (
     maintenanceType: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleMaintenanceDto[], any>({
       path: `/api/NozzleMaintenance/ByType/${maintenanceType}`,
@@ -2348,7 +2348,7 @@ export class Api<
       /** @format date-time */
       endDate?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<MaintenanceScheduleDto[], any>({
       path: `/api/NozzleMaintenance/Schedule`,
@@ -2384,7 +2384,7 @@ export class Api<
    */
   nozzleReadingsCreate = (
     data: NozzleReadingCreateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleReadingDto, any>({
       path: `/api/NozzleReadings`,
@@ -2405,7 +2405,7 @@ export class Api<
    */
   nozzleReadingsUpdate = (
     data: NozzleReadingUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/NozzleReadings`,
@@ -2456,7 +2456,7 @@ export class Api<
    */
   nozzleReadingsByNozzleDetail = (
     nozzleId: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleReadingDto[], any>({
       path: `/api/NozzleReadings/ByNozzle/${nozzleId}`,
@@ -2491,7 +2491,7 @@ export class Api<
    */
   nozzleReadingsByEmployeeDetail = (
     employeeId: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleReadingDto[], any>({
       path: `/api/NozzleReadings/ByEmployee/${employeeId}`,
@@ -2510,7 +2510,7 @@ export class Api<
    */
   nozzleReadingsSummaryByShiftDetail = (
     shiftId: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleReadingSummaryDto[], any>({
       path: `/api/NozzleReadings/Summary/ByShift/${shiftId}`,
@@ -2530,7 +2530,7 @@ export class Api<
   nozzleReadingsLatestDetail = (
     nozzleId: string,
     readingType: string,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<NozzleReadingDto, any>({
       path: `/api/NozzleReadings/Latest/${nozzleId}/${readingType}`,
@@ -2549,7 +2549,7 @@ export class Api<
    */
   nozzleReadingsValidateCreate = (
     data: ValidateReadingRequestDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<boolean, any>({
       path: `/api/NozzleReadings/Validate`,
@@ -2635,7 +2635,7 @@ export class Api<
   pricingUpdate = (
     id: string,
     data: PricingUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Pricing/${id}`,
@@ -2789,7 +2789,7 @@ export class Api<
       /** @format binary */
       file?: File;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/ReadingImage/Upload`,
@@ -2813,7 +2813,7 @@ export class Api<
       /** @format binary */
       file?: File;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/ReadingImage/UploadForReading/${readingId}`,
@@ -2835,7 +2835,7 @@ export class Api<
     query?: {
       filePath?: string;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/ReadingImage/Delete`,
@@ -2905,7 +2905,7 @@ export class Api<
   shiftUpdate = (
     id: string,
     data: ShiftUpdateDTO,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Shift/${id}`,
@@ -2991,7 +2991,7 @@ export class Api<
   suppliersUpdate = (
     id: string,
     data: SupplierUpdateDto,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Suppliers/${id}`,
@@ -3075,7 +3075,7 @@ export class Api<
   suppliersStatusPartialUpdate = (
     id: string,
     data: boolean,
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<void, any>({
       path: `/api/Suppliers/${id}/Status`,

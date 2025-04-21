@@ -12,12 +12,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ApiResponse } from "@/type/apiResponse";
+import { toast } from "sonner";
 
 export default function EmployeeListPage() {
+  const fetchEmployees = async function () {
+    const res = await api.employeeList();
+    console.log(res.data); // 👈 log the actual data
+    return res.data; // return it for React Query to store in `data`
+  };
+
   const { data, isLoading } = useQuery({
     queryKey: ["employees"],
-    queryFn: async () => await api.employeeList().then((res) => res.data),
+    queryFn: fetchEmployees,
   });
+
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["employees"],
+  //   queryFn: async () => await api.employeeList().then((res) => res.data),
+  // });
 
   return (
     <Card className="p-4">
