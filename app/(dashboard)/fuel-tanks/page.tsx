@@ -22,6 +22,8 @@ export default function FuelTanksPage() {
   const { data: fuelTanksData, isLoading, error } = useFuelTanks();
   const [fuelTanks, setFuelTanks] = useState<any[]>([]);
 
+  console.log("fuelTanksData", fuelTanksData);
+
   // Use useEffect to update state after client-side hydration
   useEffect(() => {
     if (fuelTanksData) {

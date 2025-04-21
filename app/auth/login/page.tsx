@@ -45,7 +45,7 @@ export default function LoginPage() {
 
       // ✅ Manager check + redirect
       if (role === "Manager" && !isProfileComplete) {
-        router.push("/update-pump");
+        router.push("/pump/update-pump");
         return;
       }
 

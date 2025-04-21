@@ -1,6 +1,7 @@
 // lib/hooks/useFuelTanks.ts
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/api/api"; // Using the existing API instance
+import { ApiResponse } from "@/type/apiResponse";
 import {
   FuelTank,
   FuelTankCreate,
@@ -27,7 +28,10 @@ export const useFuelTanks = () => {
     queryKey: fuelTankKeys.lists(),
     queryFn: async () => {
       const response = await api.fuelTankList();
-      return response.data;
+
+      const apiResponse = response.data.data as ApiResponse<FuelTank[]>;
+      // Return the array of fuel tanks instead of the whole response object
+      return response.data as FuelTank[];
     },
     enabled: !!petrolPumpId,
   });
