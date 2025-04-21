@@ -7,7 +7,9 @@ import { DataTable } from "@/components/ui/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Pencil, Plus, Droplets, AlertTriangle } from "lucide-react";
 export default function DispensersListPage() {
   const { data, isLoading, error } = useQuery<FuelDispenserUnitDto[]>({
     queryKey: ["dispensers"],
@@ -68,15 +70,35 @@ export default function DispensersListPage() {
     );
 
   return (
-    <div className="p-6 space-y-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Fuel Dispenser Units</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DataTable columns={columns} data={data || []} />
-        </CardContent>
-      </Card>
+    <>
+
+<div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">Dispensers</h1>
+          <p className="text-muted-foreground">
+            Manage your Dispenser
+          </p>
+        </div>
+        <Link href="/dispensers/create">
+          <Button className="flex items-center gap-2">
+            <Plus className="h-4 w-4" />
+            <span>Add Dispenser</span>
+          </Button>
+        </Link>
+      </div>
     </div>
+
+      <div className="p-6 space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Fuel Dispenser Units</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DataTable columns={columns} data={data || []} />
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useShifts } from "@/hooks/useShifts";
-import { ShiftDTO } from "@/schema/shift";
+import { ShiftDTO } from "@/type/data-contracts";
 import {
   Table,
   TableBody,

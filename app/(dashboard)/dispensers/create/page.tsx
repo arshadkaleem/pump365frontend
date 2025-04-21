@@ -43,7 +43,9 @@ export default function CreateDispenserPage() {
     queryKey: ["fuelTanks"],
     queryFn: async () => {
       const res = await api.fuelTankList();
-      return res.data;
+      console.log("fuelTanks", res.data.data);
+      
+      return res.data.data;
     },
   });
 
