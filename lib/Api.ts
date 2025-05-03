@@ -100,7 +100,7 @@ import { ContentType, HttpClient, RequestParams } from "./http-client";
 export class Api<
   SecurityDataType = unknown
 > extends HttpClient<SecurityDataType> {
-  /**
+  /**c
    * No description
    *
    * @tags Address

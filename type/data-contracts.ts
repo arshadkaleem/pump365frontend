@@ -634,6 +634,11 @@ export interface FuelDispenserCreateDto {
    * @minLength 0
    * @maxLength 50
    */
+  numberOfNozzles: number;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
   fuelType: string;
   /**
    * @minLength 0
@@ -652,6 +657,7 @@ export interface FuelDispenserUnitDto {
   fuelTankId?: string;
   /** @format int32 */
   dispenserNumber?: number;
+  numberOfNozzles: number;
   fuelType?: string | null;
   status?: string | null;
   /** @format date-time */
@@ -672,6 +678,11 @@ export interface FuelDispenserUpdateDto {
    * @max 100
    */
   dispenserNumber: number;
+  /**
+   * @minLength 0
+   * @maxLength 50
+   */
+  numberOfNozzles: number;
   /**
    * @minLength 0
    * @maxLength 50
@@ -1415,6 +1426,7 @@ export interface PetrolPumpCreateDto {
   companyName?: string | null;
   /** @minLength 1 */
   contactNumber: string;
+  SAPNo: string;
   /**
    * @format email
    * @minLength 1

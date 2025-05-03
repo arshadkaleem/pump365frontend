@@ -116,7 +116,7 @@ export default function NewFuelTankPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Fuel Type */}
+            Fuel Type
             <div className="space-y-2">
               <Label htmlFor="fuelType">Fuel Type</Label>
               <Select
@@ -191,7 +191,7 @@ export default function NewFuelTankPage() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select
-                onValueChange={(value) => setValue("status", value)}
+                onValueChange={(value) => setValue("status", value as "Active" | "Inactive" | "Maintenance")}
                 defaultValue="Active"
               >
                 <SelectTrigger id="status">

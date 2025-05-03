@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { api } from "@/api/api";
-import { useUserStore } from "@/store/userStore";
-import { format } from "date-fns";
-import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,32 +11,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  FileText,
-  Package,
-  AlertCircle,
-  Edit,
-  Building,
-  Fuel,
-  Info,
-  Users,
-  ArrowRight,
-  CheckCircle,
-  TrendingUp,
-} from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useUserStore } from "@/store/userStore";
 import { PetrolPumpDto } from "@/type/data-contracts";
+import { format } from "date-fns";
+import {
+  AlertCircle,
+  ArrowRight,
+  Building,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Edit,
+  FileText,
+  Fuel,
+  Globe,
+  Mail,
+  Package,
+  Phone,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function PumpDetailPage() {
   const [pumpData, setPumpData] = useState<PetrolPumpDto | null>(null);
@@ -79,7 +76,7 @@ export default function PumpDetailPage() {
     if (!dateString) return "Not set";
     try {
       return format(new Date(dateString), "dd MMM yyyy");
-    } catch (e) {
+    } catch {
       return "Invalid date";
     }
   };
@@ -196,11 +193,13 @@ export default function PumpDetailPage() {
                       {licenseStatus && (
                         <Badge
                           variant={
-                            licenseStatus.badge as
-                              | "default"
-                              | "destructive"
-                              | "warning"
-                              | "success"
+                            licenseStatus.badge === "warning" || licenseStatus.badge === "success"
+                              ? "outline"
+                              : (licenseStatus.badge as
+                                  | "default"
+                                  | "destructive"
+                                  | "outline"
+                                  | "secondary")
                           }
                         >
                           {licenseStatus.message}
@@ -240,7 +239,7 @@ export default function PumpDetailPage() {
                       Status
                     </h3>
                     <Badge
-                      variant={pumpData.isActive ? "success" : "destructive"}
+                      variant={pumpData.isActive ? "default" : "destructive"}
                     >
                       {pumpData.isActive ? "Active" : "Inactive"}
                     </Badge>
@@ -421,7 +420,7 @@ export default function PumpDetailPage() {
                 Operational Hours
               </CardTitle>
               <CardDescription>
-                Manage your petrol pump's operating schedule
+                Manage your petrol pumps operating schedule
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -586,13 +585,14 @@ export default function PumpDetailPage() {
                       {licenseStatus && (
                         <Badge
                           variant={
-                            licenseStatus.badge as
-                              | "default"
-                              | "destructive"
-                              | "warning"
-                              | "success"
-                          }
-                        >
+                            licenseStatus.badge === "warning" || licenseStatus.badge === "success"
+                              ? "outline"
+                              : (licenseStatus.badge as
+                                  | "default"
+                                  | "destructive"
+                                  | "outline"
+                                  | "secondary")
+                          }>
                           {licenseStatus.message}
                         </Badge>
                       )}

@@ -35,7 +35,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
-import { format, parse } from "date-fns";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import {
   CalendarIcon,
@@ -116,6 +116,7 @@ export function UpdatePumpForm() {
 
         setIsLoading(false);
       } catch (error) {
+        console.error("Error fetching pump data:", error);
         toast.error("Failed to load pump data");
         setIsLoading(false);
       }
@@ -138,6 +139,7 @@ export function UpdatePumpForm() {
       toast.success("Pump profile updated successfully!");
       router.push("/dashboard");
     } catch (error) {
+      console.error("Error fetching pump data:", error);
       toast.error("Update failed. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -151,6 +153,16 @@ export function UpdatePumpForm() {
         <span>Loading pump details...</span>
       </div>
     );
+  }
+
+  function parseISO(value: string): Date | undefined {
+    try {
+      const [day, month, year] = value.split("-").map(Number);
+      if (!day || !month || !year) return undefined;
+      return new Date(year, month - 1, day);
+    } catch {
+      return undefined;
+    }
   }
 
   return (
@@ -258,7 +270,7 @@ export function UpdatePumpForm() {
                             mode="single"
                             selected={
                               field.value
-                                ? parse(field.value, "dd-MM-yyyy", new Date())
+                                ? parseISO(field.value)
                                 : undefined
                             }
                             onSelect={(date) =>

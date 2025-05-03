@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -43,8 +43,9 @@ import {
 } from "@/components/ui/popover";
 import { api } from "@/api/api";
 import { cn } from "@/lib/utils";
+import { useUserStore } from "@/store/userStore";
 
-// Employee creation schema based on the provided Zod schema
+// Schema
 const employeeCreateSchema = z.object({
   petrolPumpId: z.string().uuid(),
   firstName: z.string().min(1, "First name is required").max(100),
@@ -69,48 +70,61 @@ const employeeCreateSchema = z.object({
 type EmployeeFormValues = z.infer<typeof employeeCreateSchema>;
 
 const roles = [
-  { id: "manager", name: "Manager" },
+  // { id: "manager", name: "Manager" },
   { id: "attendant", name: "Attendant" },
-  { id: "cashier", name: "Cashier" },
-  { id: "supervisor", name: "Supervisor" },
-  { id: "admin", name: "Administrator" },
+  // { id: "cashier", name: "Cashier" },
+  // { id: "supervisor", name: "Supervisor" },
+  // { id: "admin", name: "Administrator" },
 ];
 
 export default function CreateEmployeePage() {
   const router = useRouter();
+  const petrolPumpId = useUserStore((state) => state.petrolPumpId);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Default values for the form
-  const defaultValues: Partial<EmployeeFormValues> = {
-    petrolPumpId: "", // This would typically be set from context or params
-    hireDate: new Date(),
-    dateOfBirth: null,
-  };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const form = useForm<EmployeeFormValues>({
     resolver: zodResolver(employeeCreateSchema),
-    defaultValues,
+    defaultValues: {
+      petrolPumpId: petrolPumpId || "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      role: "",
+      hireDate: new Date(),
+      dateOfBirth: null,
+      governmentId: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      phoneNumber: "",
+      emergencyContact: "",
+    },
   });
 
   async function onSubmit(data: EmployeeFormValues) {
     setIsSubmitting(true);
 
     try {
-      // Convert dates to ISO strings as required by the API
       const formattedData = {
         ...data,
         hireDate: data.hireDate.toISOString(),
         dateOfBirth: data.dateOfBirth ? data.dateOfBirth.toISOString() : null,
       };
 
-      const response = await api.employeeCreate(formattedData);
+       await api.employeeCreate(formattedData);
 
       toast({
         title: "Employee created",
         description: `${data.firstName} ${data.lastName} has been successfully added.`,
       });
 
-      // Redirect to employees list
       router.push("/employees");
       router.refresh();
     } catch (error) {
@@ -125,6 +139,8 @@ export default function CreateEmployeePage() {
     }
   }
 
+  if (!isMounted) return null;
+
   return (
     <div className="container mx-auto py-10">
       <Card className="max-w-4xl mx-auto">
@@ -137,7 +153,7 @@ export default function CreateEmployeePage() {
         </CardHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-6 mb-4">
               {/* Personal Information Section */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Personal Information</h3>
@@ -205,7 +221,7 @@ export default function CreateEmployeePage() {
                                 date > new Date() ||
                                 date < new Date("1900-01-01")
                               }
-                              initialFocus
+                              autoFocus
                             />
                           </PopoverContent>
                         </Popover>
@@ -437,15 +453,15 @@ export default function CreateEmployeePage() {
                   name="petrolPumpId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Petrol Pump ID *</FormLabel>
+                      {/* <FormLabel>Petrol Pump ID *</FormLabel> */}
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} hidden />
                       </FormControl>
-                      <FormDescription>
+                      {/* <FormDescription>
                         Enter the UUID of the petrol pump where this employee
                         will work
-                      </FormDescription>
-                      <FormMessage />
+                      </FormDescription> */}
+                      {/* <FormMessage /> */}
                     </FormItem>
                   )}
                 />

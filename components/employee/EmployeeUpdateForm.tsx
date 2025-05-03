@@ -43,6 +43,7 @@ export function EmployeeUpdateForm({
       toast.success("Employee updated successfully");
       router.refresh();
     } catch (err) {
+      console.error("Error fetching pump data:", err);
       toast.error("Update failed");
     }
   };

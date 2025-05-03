@@ -12,11 +12,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ApiResponse } from "@/type/apiResponse";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Pencil, Plus, Droplets, AlertTriangle } from "lucide-react";
+import { Plus } from "lucide-react";
+import { EmployeeDto } from "@/type/data-contracts";
+
 export default function EmployeeListPage() {
   const fetchEmployees = async function () {
     const res = await api.employeeList();
@@ -25,7 +26,6 @@ export default function EmployeeListPage() {
       toast.error("Failed to fetch employees");
       return []; // Return an empty array or handle the error as needed
     }
-
 
     return res.data.data; // return it for React Query to store in `data`
   };
@@ -42,7 +42,7 @@ export default function EmployeeListPage() {
 
   return (
     <>
-      <div className="space-y-6 mb-5">
+      <div className="space-y-6 m-4">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Employees</h1>
@@ -56,50 +56,90 @@ export default function EmployeeListPage() {
           </Link>
         </div>
       </div>
-
-      <Card className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Employee List</h1>
-        <CardContent className="p-0 overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Full Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Hire Date</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading
-                ? Array.from({ length: 5 }).map((_, i) => (
+      <div className="space-y-4 p-4">
+        <Card className="p-4 rounded-md shadow-sm bg-white border border-gray-200">
+          <h1 className="text-lg font-semibold text-gray-800 ">
+            Employee List
+          </h1>
+          <CardContent className="p-0  overflow-x-auto">
+            <Table className="w-full text-sm text-gray-700">
+              <TableHeader className="bg-gray-100">
+                <TableRow>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Full Name
+                  </TableHead>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Email
+                  </TableHead>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Role
+                  </TableHead>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Phone
+                  </TableHead>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Hire Date
+                  </TableHead>
+                  <TableHead className="px-4 py-2 text-sm font-semibold text-center">
+                    Status
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {isLoading ? (
+                  Array.from({ length: 5 }).map((_, i) => (
                     <TableRow key={i}>
                       <TableCell colSpan={6}>
                         <Skeleton className="h-6 w-full" />
                       </TableCell>
                     </TableRow>
                   ))
-                : data?.map((emp: any) => (
+                ) : data?.length === 0 ? (
+                  <TableRow>
+                    <TableCell
+                      colSpan={6}
+                      className="text-center py-4 text-sm text-gray-500"
+                    >
+                      No employees found
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  data?.map((emp: EmployeeDto) => (
                     <TableRow key={emp.employeeId}>
-                      <TableCell>
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
                         {emp.fullName || `${emp.firstName} ${emp.lastName}`}
                       </TableCell>
-                      <TableCell>{emp.email}</TableCell>
-                      <TableCell>{emp.role}</TableCell>
-                      <TableCell>{emp.phoneNumber}</TableCell>
-                      <TableCell>
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
+                        {emp.email}
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
+                        {emp.role}
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
+                        {emp.phoneNumber}
+                      </TableCell>
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
                         {emp.hireDate?.split("T")[0] || "—"}
                       </TableCell>
-                      <TableCell>
-                        {emp.isActive ? "Active" : "Inactive"}
+                      <TableCell className="px-4 py-2 text-sm font-medium text-center">
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                            emp.isActive
+                              ? "bg-black text-white border border-black"
+                              : "bg-gray-100 text-gray-700 border border-gray-300"
+                          }`}
+                        >
+                          {emp.isActive ? "Active" : "Inactive"}
+                        </span>
                       </TableCell>
                     </TableRow>
-                  ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 }

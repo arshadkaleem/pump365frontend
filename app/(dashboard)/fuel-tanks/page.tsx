@@ -17,10 +17,11 @@ import { Pencil, Plus, Droplets, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import { FuelTankDto } from "@/type/data-contracts";
 
 export default function FuelTanksPage() {
   const { data: fuelTanksData, isLoading, error } = useFuelTanks();
-  const [fuelTanks, setFuelTanks] = useState<any[]>([]);
+  const [fuelTanks, setFuelTanks] = useState<FuelTankDto[]>([]);
 
   console.log("fuelTanksData", fuelTanksData);
 
@@ -107,7 +108,7 @@ export default function FuelTanksPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 m-4">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Fuel Tanks</h1>
@@ -211,7 +212,7 @@ export default function FuelTanksPage() {
           <Droplets className="h-12 w-12 text-muted-foreground mb-4" />
           <h3 className="text-lg font-medium">No Fuel Tanks Found</h3>
           <p className="text-muted-foreground mb-4">
-            You haven't added any fuel tanks yet.
+            You have not added any fuel tanks yet.
           </p>
           <Link href="/fuel-tanks/create">
             <Button>

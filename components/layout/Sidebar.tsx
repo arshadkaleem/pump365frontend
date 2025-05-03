@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { LogOut } from "lucide-react";
 import { deleteCookie } from "cookies-next";
 import Image from "next/image";

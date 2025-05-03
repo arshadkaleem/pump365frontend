@@ -18,6 +18,7 @@ import { api } from "@/api/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { CalendarIcon, Loader2 } from "lucide-react";
+import { format } from "date-fns";
 // UI Components from shadcn
 import { Calendar } from "@/components/ui/calendar";
 
@@ -61,7 +62,7 @@ export function CreateEmployeeForm() {
       toast.success("Employee created successfully");
       router.refresh();
       form.reset();
-    } catch (error) {
+    } catch  {
       toast.error("Failed to create employee");
     }
   };
@@ -258,9 +259,9 @@ export function CreateEmployeeForm() {
                           onSelect={(date) =>
                             field.onChange(date ? date.toISOString() : null)
                           }
-                          initialFocus
-                          captionLayout="dropdown-buttons"
-                          fromYear={1940}
+                          autoFocus
+                          captionLayout="dropdown"
+                          startMonth={new Date(1940, 0)}
                           toYear={2010}
                         />
                       </PopoverContent>
@@ -387,8 +388,8 @@ export function CreateEmployeeForm() {
             </div>
 
             <div className="flex justify-end">
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? (
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Submitting...
